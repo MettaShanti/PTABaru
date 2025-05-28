@@ -26,13 +26,13 @@
     <input type="number" name="password" id="" class="form-control mb-2" value="{{ $user['password']}}">
 
      Role
-    @error('role')
+    @error('level')
         <span class="text-danger">({{ $message }})</span>
     @enderror 
     <select name="role" class="form-control mb-2">
         <option value="">-- Pilih Role --</option>
-        <option value="admin" {{ $user['role'] == 'admin' ? 'selected' : '' }}>admin</option>
-        <option value="pemilik" {{ $user['role'] == 'pemilik' ? 'selected' : '' }}>pemilik</option>
+        <option value="admin" {{ $user['level'] == 'admin' ? 'selected' : '' }}>admin</option>
+        <option value="pemilik" {{ $user['level'] == 'pemilik' ? 'selected' : '' }}>pemilik</option>
     </select>
 
     <button type="submit" class="btn btn-primary">SIMPAN</button>

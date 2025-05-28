@@ -27,7 +27,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'level' => $request->level,
         ]);
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan!');
     }
@@ -45,7 +45,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
+            'level' => $request->level,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
         return redirect()->route('users.index')->with('success', 'User berhasil diupdate!');

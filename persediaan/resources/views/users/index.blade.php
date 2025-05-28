@@ -18,7 +18,7 @@
             <tr>
                 <td>{{ $row->name }}</td>
                 <td>{{ $row->email }}</td>
-                <td>{{ $row->role }}</td>
+                <td>{{ $row->level }}</td>
                 <td>
                     <a href="{{ route('users.edit', $row->id) }}" class="btn btn-xs btn-warning">UBAH</a>
                     <form action="{{ route('users.destroy', $row->id) }}" method="post" style="display:inline">

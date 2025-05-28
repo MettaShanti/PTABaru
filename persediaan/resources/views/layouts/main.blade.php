@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-/.../" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.7') }}" rel="stylesheet" />
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
@@ -31,60 +31,126 @@
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-      
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-          <i class="fas fa-tachometer-alt me-2"></i>
-          <span class="nav-link-text ms-1">Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('suppliers.*') ? 'active' : '' }}" href="{{ route('suppliers.index') }}">
-          <i class="fas fa-truck me-2"></i>
-          <span class="nav-link-text ms-1">Supplier</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('produks.*') ? 'active' : '' }}" href="{{ route('produks.index') }}">
-          <i class="fa-solid fa-boxes-stacked me-2"></i>
-          <span class="nav-link-text ms-1">Produk</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('produk-masuks.*') ? 'active' : '' }}" href="{{ route('produk-masuks.index') }}">
-          <i class="fas fa-arrow-circle-down me-2"></i>
-          <span class="nav-link-text ms-1">Produk Masuk</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('produk-keluars.*') ? 'active' : '' }}" href="{{ route('produk-keluars.index') }}">
-          <i class="fas fa-arrow-circle-up me-2"></i>
-          <span class="nav-link-text ms-1">Produk Keluar</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('stoks.*') ? 'active' : '' }}" href="{{ route('stoks.index') }}">
-          <i class="fas fa-warehouse me-2"></i>
-          <span class="nav-link-text ms-1">Stok</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-          <i class="fas fa-users me-2"></i>
-            <span class="nav-link-text ms-1">Manajemen Users</span>
-        </a>
-      </li>
-      <li class="nav-item mt-3">
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <a href="{{ route('logout') }}" class="nav-link text-danger" onclick="event.preventDefault(); this.closest('form').submit();">
-            <i class="fas fa-sign-out-alt me-2 text-danger"></i>
-            <span class="nav-link-text ms-1 fw-bold">Log Out</span>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+            <i class="fas fa-tachometer-alt me-2"></i>
+            <span class="nav-link-text ms-1">Dashboard</span>
           </a>
-        </form>
-      </li>
-    </ul>
+        </li>
+
+        {{-- Menu khusus admin --}}
+        @auth
+          @if(Auth::user()->level == 'admin')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('suppliers.*') ? 'active' : '' }}" href="{{ route('suppliers.index') }}">
+            <i class="fas fa-truck me-2"></i>
+            <span class="nav-link-text ms-1">Supplier</span>
+          </a>
+        </li>
+        @endif
+        @endauth
+
+        {{-- Menu khusus admin --}}
+        @auth
+          @if(Auth::user()->level == 'admin')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('produks.*') ? 'active' : '' }}" href="{{ route('produks.index') }}">
+            <i class="fa-solid fa-boxes-stacked me-2"></i>
+            <span class="nav-link-text ms-1">Produk</span>
+          </a>
+        </li>
+        @endif
+        @endauth
+
+        {{-- Menu khusus admin --}}
+        @auth
+          @if(Auth::user()->level == 'admin')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('produk-masuks.*') ? 'active' : '' }}" href="{{ route('produk-masuks.index') }}">
+            <i class="fas fa-arrow-circle-down me-2"></i>
+            <span class="nav-link-text ms-1">Produk Masuk</span>
+          </a>
+        </li>
+        @endif
+        @endauth
+
+        {{-- Menu khusus admin --}}
+        @auth
+          @if(Auth::user()->level == 'admin')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('produk-keluars.*') ? 'active' : '' }}" href="{{ route('produk-keluars.index') }}">
+            <i class="fas fa-arrow-circle-up me-2"></i>
+            <span class="nav-link-text ms-1">Produk Keluar</span>
+          </a>
+        </li>
+        @endif
+        @endauth
+
+        {{-- Menu khusus admin --}}
+        @auth
+          @if(Auth::user()->level == 'admin')
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('stoks.*') ? 'active' : '' }}" href="{{ route('stoks.index') }}">
+            <i class="fas fa-warehouse me-2"></i>
+            <span class="nav-link-text ms-1">Stok</span>
+          </a>
+        </li>
+        @endif
+        @endauth
+
+        
+        <!-- laporan -->
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#laporanMenu" class="nav-link" aria-controls="laporanMenu" role="button" aria-expanded="false">
+            <i class="fas fa-file-alt me-2"></i>
+            <span class="nav-link-text ms-1">Laporan</span>
+          </a>
+          <div class="collapse" id="laporanMenu">
+            <ul class="nav ms-4 ps-2">
+              <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('laporan.produkmasuk') ? 'active' : '' }}" href="{{ route('laporan.produkmasuk') }}">
+                  <i class="fas fa-arrow-down me-2 text-sm"></i>
+                  <span class="sidenav-normal">Laporan Produk Masuk</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('laporan.produkkeluar') ? 'active' : '' }}" href="{{ route('laporan.produkkeluar') }}">
+                  <i class="fas fa-arrow-up me-2 text-sm"></i>
+                  <span class="sidenav-normal">Laporan Produk Keluar</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('laporan.stok') ? 'active' : '' }}" href="{{ route('laporan.stok') }}">
+                  <i class="fas fa-box me-2 text-sm"></i>
+                  <span class="sidenav-normal">Laporan Stok</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li> 
+
+        {{-- Menu khusus admin --}}
+        @auth
+          @if(Auth::user()->level == 'admin')
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                <i class="fas fa-users-cog me-2"></i>
+                <span class="nav-link-text ms-1">Manajemen Users</span>
+              </a>
+            </li>
+          @endif
+        @endauth
+        <li class="nav-item mt-3">
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <a href="{{ route('logout') }}" class="nav-link text-danger" onclick="event.preventDefault(); this.closest('form').submit();">
+              <i class="fas fa-sign-out-alt me-2 text-danger"></i>
+              <span class="nav-link-text ms-1 fw-bold">Log Out</span>
+            </a>
+          </form>
+        </li>
+      </ul>
     </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -98,60 +164,22 @@
           <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
-          </div>
-          <ul class="navbar-nav justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="#" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="#" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+          <div class="px-2 pt-2">
+            @auth
+              <div class="card shadow-sm border-0 mb-2" style="background: linear-gradient(90deg, #5e72e4 0%, #825ee4 100%); color: #fff; max-width: 220px; margin: 0 auto;">
+                <div class="card-body py-2 px-2 text-center">
+                  <i class="fa fa-user-circle mb-1" style="font-size:1.3rem;" aria-hidden="true"></i>
+                  <div style="font-size:0.95rem; font-weight: 600; line-height:1;">
+                    Welcome back,
+                  </div>
+                  <div style="font-size:1.05rem; font-weight: bold; line-height:1;">
+                    {{ Auth::user()->name }}
+                  </div>
                 </div>
-              </a>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="#" class="nav-link text-body p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="#" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="#">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="{{ asset('img/team-2.jpg') }}" class="avatar avatar-sm me-3 ">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Notifikasi</span> produk expired
-                        </h6>
-                        <p class="text-xs text-secondary mb-0 ">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <!-- Tambahkan notifikasi lain di sini -->
-              </ul>
-            </li>
-          </ul>
+              </div>
+            @endauth
+          </div>
         </div>
       </div>
     </nav>
