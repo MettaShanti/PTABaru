@@ -49,7 +49,7 @@ class ProdukMasukController extends Controller
 
     public function show(ProdukMasuk $produkMasuk)
     {
-        return view('produk_masuks.show', compact('produkMasuk'));
+        //return view('produk_masuks.show', compact('produkMasuk'));
     }
 
     public function edit(ProdukMasuk $produkMasuk)

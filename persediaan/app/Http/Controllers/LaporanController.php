@@ -10,9 +10,7 @@ use PDF;
 
 class LaporanController extends Controller
 {
-    // =======================
-    // Laporan Produk Masuk
-    // =======================
+    // Laporan produk masuk
     public function produkMasuk(Request $request)
     {
         $query = ProdukMasuk::with('produk');
@@ -34,6 +32,7 @@ class LaporanController extends Controller
         return view('laporanpm.index', compact('produkMasuks', 'request'));
     }
 
+    // Cetak laporan produk masuk
     public function cetakProdukMasukPdf(Request $request)
     {
         $query = ProdukMasuk::with('produk');
@@ -57,9 +56,7 @@ class LaporanController extends Controller
         return $pdf->download('laporan-produk-masuk.pdf');
     }
 
-    // =======================
-    // Laporan Produk Keluar
-    // =======================
+    // Laporan produk keluar
     public function produkKeluar(Request $request)
     {
         $query = ProdukKeluar::with('produk');
@@ -81,6 +78,7 @@ class LaporanController extends Controller
         return view('laporanpk.index', compact('produkKeluar', 'request'));
     }
 
+    // Cetak laporan produk keluar
     public function cetakProdukKeluarPdf(Request $request)
     {
         $query = ProdukKeluar::with('produk');
@@ -104,9 +102,7 @@ class LaporanController extends Controller
         return $pdf->download('laporan-produk-keluar.pdf');
     }
 
-    // =======================
     // Laporan Stok
-    // =======================
     public function stok(Request $request)
     {
         $query = Stok::query();
@@ -129,6 +125,7 @@ class LaporanController extends Controller
         return view('laporanstok.index', compact('stokList', 'request'));
     }
 
+    // Cetak laporan stok
     public function cetakLaporanStokPdf(Request $request)
     {
         $query = Stok::query();

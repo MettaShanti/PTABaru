@@ -41,7 +41,7 @@ class ProdukController extends Controller
             'nama_produk' => $request->nama_produk,
             'jenis' => $request->jenis,
             'harga' => $request->harga,
-            'stok' => $request->stok, // <- ini penting
+            'stok' => $request->stok, 
             'satuan' => $request->satuan,
             'supplier_id' => $request->supplier_id,
         ]);
@@ -51,7 +51,7 @@ class ProdukController extends Controller
 
     public function show(Produk $produk)
     {
-        return view('produks.show', compact('produk'));
+        //return view('produks.show', compact('produk'));
     }
 
     public function edit(Produk $produk)

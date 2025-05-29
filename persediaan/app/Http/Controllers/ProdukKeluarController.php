@@ -52,7 +52,7 @@ class ProdukKeluarController extends Controller
 
     public function show(ProdukKeluar $produkKeluar)
     {
-        return view('produk_keluars.show', compact('produkKeluar'));
+        //return view('produk_keluars.show', compact('produkKeluar'));
     }
 
     public function edit(ProdukKeluar $produkKeluar)
@@ -73,7 +73,7 @@ class ProdukKeluarController extends Controller
 
         // Jika produk atau jumlah berubah, update stok
         if ($produkKeluar->produk_id != $request->produk_id || $produkKeluar->jumlah != $request->jumlah) {
-            // Kembalikan stok lama
+            // untuk Kembalikan stok lama
             $produkLama = Produk::find($produkKeluar->produk_id);
             if ($produkLama) {
                 $produkLama->stok += $produkKeluar->jumlah;

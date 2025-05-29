@@ -10,9 +10,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.7') }}" rel="stylesheet" />
   <style>
-    body { background: linear-gradient(120deg, #5e72e4 0%, #825ee4 100%); min-height: 100vh; }
-    .card { border-radius: 1rem; }
-  </style>
+      body {
+        background: url('{{ asset('img/bg.jpg') }}') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+      }
+      .card {
+        border-radius: 1rem;
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.85);
+      }
+</style>
+
 </head>
 <body>
   <div class="container d-flex align-items-center justify-content-center" style="min-height:100vh;">
@@ -49,12 +58,6 @@
                 @error('password')
                   <small class="text-danger">{{ $message }}</small>
                 @enderror
-              </div>
-              <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                <label class="form-check-label" for="remember">
-                  Remember me
-                </label>
               </div>
               <button type="submit" class="btn btn-primary w-100" style="border-radius: 1rem;">Login</button>
             </form>
