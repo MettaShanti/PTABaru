@@ -28,9 +28,8 @@
         </form>
 
         <table class="table table-bordered table-striped">
-            <thead>
+            <thead class="table-dark">
                 <tr>
-                    <th>No</th>
                     <th>Kode Produk</th>
                     <th>Nama Produk</th>
                     <th>Tanggal Keluar</th>
@@ -42,7 +41,6 @@
             <tbody>
                 @forelse($produkKeluar as $pk)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $pk->produk->kode_produk ?? '-' }}</td>
                     <td>{{ $pk->produk->nama_produk ?? '-' }}</td>
                     <td>{{ $pk->tgl_keluar }}</td>

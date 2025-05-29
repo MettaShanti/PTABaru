@@ -1,8 +1,10 @@
 @extends('layouts.main')
 
 @section('content')
-<h4>Manajemen Users</h4>
-<a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Tambah User</a>
+<div class="d-flex justify-content-between mb-3">
+    <h2>Manajemen Users</h2>
+    <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah User</a>
+</div>
 <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
         <thead class="table-dark">

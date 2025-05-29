@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-2 d-flex align-items-end gap-2">
                 <button class="btn btn-primary w-50" type="submit">Filter</button>
-                <a href="{{ route('laporan.stok.cetak', request()->all()) }}" target="_blank" class="btn btn-danger w-50">
+                <a href="{{ route('laporan.stok.cetak', request()->all()) }}" target="_blank" class="btn btn-success w-50">
                     <i class="fas fa-file-pdf"></i> Cetak
                 </a>
             </div>
@@ -29,7 +29,7 @@
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead>
+                <thead class="table-dark">
                     <tr>
                         <th>Kode Produk</th>
                         <th>Nama Produk</th>

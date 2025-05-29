@@ -25,9 +25,14 @@
         <label>Stok</label>
         <input type="number" name="stok" class="form-control" value="{{ $produk->stok }}" required>
     </div>
-    <div class="mb-2">
+    <div class="mb-3">
         <label>Satuan</label>
-        <input type="text" name="satuan" class="form-control" value="{{ $produk->satuan }}" required>
+        <select name="satuan" class="form-control" required>
+            <option value="">Pilih Satuan</option>
+            <option value="dus">Dus</option>
+            <option value="box">Box</option>
+            <option value="pack">Pack</option>
+        </select>
     </div>
     <div class="mb-2">
         <label>Supplier</label>

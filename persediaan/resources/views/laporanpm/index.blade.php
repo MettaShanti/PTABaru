@@ -28,11 +28,10 @@
         </form>
 
         <table class="table table-bordered table-striped">
-            <thead>
+            <thead class="table-dark">
                 <tr>
-                    <th>No</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Produk</th>
+                    <th>Kode Produk</th>
+                    <th>Nama Produk</th>
                     <th>Tanggal Produk Masuk</th>
                     <th>Tanggal Produksi</th>
                     <th>Tanggal Expired</th>
@@ -42,7 +41,6 @@
             <tbody>
                 @forelse($produkMasuks as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->produk->kode_produk ?? '-' }}</td>
                         <td>{{ $item->produk->nama_produk ?? '-' }}</td>
                         <td>{{ $item->tgl_masuk }}</td>

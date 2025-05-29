@@ -30,7 +30,7 @@
         <div class="card shadow-lg">
           <div class="card-body p-4">
             <div class="text-center mb-4">
-              <img src="{{ asset('img/apple-icon.png') }}" width="60" alt="Logo">
+              <!-- <img src="{{ asset('img/apple-icon.png') }}" width="60" alt="Logo"> -->
               <h4 class="mt-2 mb-0 font-weight-bold">Login</h4>
               <small class="text-muted">Persediaan Produk CV Jaya Abadi</small>
             </div>
@@ -62,7 +62,7 @@
               <button type="submit" class="btn btn-primary w-100" style="border-radius: 1rem;">Login</button>
             </form>
             <div class="mt-3 text-center">
-              <a href="{{ route('password.request') }}" class="text-secondary">Lupa password?</a>
+              <!-- <a href="{{ route('password.request') }}" class="text-secondary">Lupa password?</a> -->
             </div>
           </div>
         </div>
