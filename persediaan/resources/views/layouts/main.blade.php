@@ -162,6 +162,13 @@
       @yield('content')
     </div>
   </main>
+  
+<style>
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.4em 0.6em;
+    }
+</style>
 
   {{-- Scripts --}}
   <script src="{{ asset('js/core/popper.min.js') }}"></script>

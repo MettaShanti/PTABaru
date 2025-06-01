@@ -10,7 +10,7 @@
     <thead class="table-dark">
         <tr>
             <th>Kode Produk</th>
-            <th>Produk</th>
+            <th>Nama Produk</th>
             <th>Tgl Masuk</th>
             <th>Tgl Produksi</th>
             <th>Tgl Exp</th>
