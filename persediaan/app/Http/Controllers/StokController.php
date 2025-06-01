@@ -13,7 +13,8 @@ class StokController extends Controller
         $today = now();
 
         $will_expired = Stok::whereBetween('tgl_exp_terakhir', [$today, $today->copy()->addDays(21)])->count();
-        $expired = Stok::where('tgl_exp_terakhir', '<', $today)->count();
+        $expired = Stok::where('tgl_exp_terakhir', '=', $today->copy()->subDay())->count();
+        //$expired = Stok::where('tgl_exp_terakhir', '<', $today)->count();
 
         if ($expired > 0 || $will_expired > 0) {
             $message = '';
@@ -43,6 +44,11 @@ class StokController extends Controller
         $expired = Stok::where('tgl_exp_terakhir', '<', $today)->get();
 
         return view('stoks.expired', compact('will_expired', 'expired'));
+    }
+    public function clearAlert(Request $request)
+    {
+        session()->forget(['stok_alert', 'notif_count']);
+        return response()->json(['status' => 'cleared']);
     }
 
 }

@@ -48,6 +48,9 @@ Route::middleware(['auth', 'Ceklevel:admin,pemilik'])->group(function () {
     Route::get('/laporan/stok/cetak', [LaporanController::class, 'cetakLaporanStokPdf'])->name('laporan.stok.cetak');
 
 });
+
+Route::post('/stok/clear-alert', [StokController::class, 'clearAlert'])->name('stok.clear-alert');
+
 Route::post('/stok/clear-alert', function () {
     session()->forget(['stok_alert', 'notif_count']);
     return response()->json(['cleared' => true]);

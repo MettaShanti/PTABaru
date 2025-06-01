@@ -36,6 +36,7 @@
 @endif
 
 
+
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="mb-0">Data Stok</h2>
     <a href="{{ route('stoks.expired') }}" class="btn btn-warning position-relative">
