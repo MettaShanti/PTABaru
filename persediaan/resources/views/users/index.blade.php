@@ -6,7 +6,7 @@
     <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah User</a>
 </div>
 <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover">
+    <table id="example" class="table table-striped table-bordered table-hover">
         <thead class="table-dark">
             <tr>
                 <th>Nama User</th>

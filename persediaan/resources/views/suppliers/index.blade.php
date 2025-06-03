@@ -6,7 +6,7 @@
     <a href="{{ route('suppliers.create') }}" class="btn btn-primary">Tambah Supplier</a>
 </div>
 
-<table class="table table-bordered">
+<table id="example" class="table table-bordered">
     <thead class="table-dark">
         <tr>
             <th>No</th>

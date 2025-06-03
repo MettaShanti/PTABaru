@@ -1,20 +1,45 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use App\Models\Stok;
+namespace App\Http\Controllers;
 
+use App\Models\Stok;
+use App\Models\Produk;
+use App\Models\ProdukMasuk;
+use App\Models\ProdukKeluar;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $stokNotif = Stok::getStokNotifications();
-
-        if ($stokNotif['total'] > 0) {
-            session()->flash('stok_alert', $stokNotif['message']);
-            session()->flash('notif_count', $stokNotif['total']);
-        }
-
-        return view('dashboard');
+{
+    // Notifikasi stok
+    $stokNotif = Stok::getStokNotifications();
+    if ($stokNotif['total'] > 0) {
+        session()->flash('stok_alert', $stokNotif['message']);
+        session()->flash('notif_count', $stokNotif['total']);
     }
+
+    // Ambil semua nama produk
+    $produk = Produk::orderBy('nama_produk')->get();
+    $labels = $produk->pluck('nama_produk')->toArray();
+
+    // Data stok akhir dari view_stok
+    $stokDataRaw = Stok::all()->keyBy('nama_produk');
+    $stokData = collect($labels)->map(fn($nama) => $stokDataRaw[$nama]->stok_akhir ?? 0);
+
+    // Data Produk Masuk
+    $produkMasukRaw = ProdukMasuk::with('produk')->get()
+        ->groupBy('produk.nama_produk')
+        ->map(fn($item) => $item->sum('jumlah'));
+    $produkMasukData = collect($labels)->map(fn($nama) => $produkMasukRaw[$nama] ?? 0);
+
+    // Data Produk Keluar
+    $produkKeluarRaw = ProdukKeluar::with('produk')->get()
+        ->groupBy('produk.nama_produk')
+        ->map(fn($item) => $item->sum('jumlah'));
+    $produkKeluarData = collect($labels)->map(fn($nama) => $produkKeluarRaw[$nama] ?? 0);
+
+    return view('dashboard', compact('labels', 'stokData', 'produkMasukData', 'produkKeluarData'));
+}
+
 }

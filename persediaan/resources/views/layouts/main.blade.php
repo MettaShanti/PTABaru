@@ -23,7 +23,13 @@
 
   {{-- Optional analytics --}}
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  
+    <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
+
 </head>
+
 
 <body class="g-sidenav-show bg-gray-100">
   {{-- SIDEBAR --}}
@@ -153,29 +159,223 @@
       </div>
     </nav>
 
-    {{-- Content Area --}}
     <div class="container-fluid py-4">
       @if(session()->has('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
       @endif
 
-      @yield('content')
+  {{-- CHART (tampilkan hanya di dashboard) --}}
+  @if(request()->routeIs('dashboard') && isset($labels, $stokData, $produkMasukData, $produkKeluarData))
+    <div class="card mb-4">
+      <div class="card-header pb-0">
+        <h6>Grafik Persediaan Produk</h6>
+      </div>
+      <div class="card-body">
+        <canvas id="produkChart" height="100"></canvas>
+      </div>
     </div>
-  </main>
-  
-<style>
+  @endif
+
+  @yield('content')
+
+
+@isset($labels, $stokData, $produkMasukData, $produkKeluarData)
+<script>
+    const labels = {!! json_encode($labels) !!};
+    const stokData = {!! json_encode($stokData->values()) !!};
+    const produkMasukData = {!! json_encode($produkMasukData->values()) !!};
+    const produkKeluarData = {!! json_encode($produkKeluarData->values()) !!};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const ctx = document.getElementById("produkChart")?.getContext("2d");
+      if (ctx) {
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Stok',
+                data: stokData,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: true
+              },
+              {
+                label: 'Produk Masuk',
+                data: produkMasukData,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true
+              },
+              {
+                label: 'Produk Keluar',
+                data: produkKeluarData,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: true
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { position: 'top' },
+              title: {
+                display: true,
+                text: 'Grafik Tren Stok Produk'
+              }
+            }
+          }
+        });
+      }
+    });
+</script>
+@endisset
+
+
+  <style>
     .badge {
-        font-size: 0.75rem;
-        padding: 0.4em 0.6em;
+      font-size: 0.75rem;
+      padding: 0.4em 0.6em;
     }
-</style>
+    #bg-header-strip {
+    background-image: url("{{ asset('img/bg.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    height: 60px;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  </style>
 
   {{-- Scripts --}}
   <script src="{{ asset('js/core/popper.min.js') }}"></script>
   <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/plugins/perfect-scrollbar.min.js') }}"></script>
   <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
-  <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="{{ asset('js/soft-ui-dashboard.min.js?v=1.0.7') }}"></script>
+
+  @yield('scripts')
+
+  {{-- DataTables Scripts --}}
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+  <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+  <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const table = document.querySelector('#example');
+      if (table) {
+        new DataTable('#example', {
+          scrollX: true
+          // responsive: true // Optional: bisa aktifkan jika dibutuhkan
+        });
+      }
+    });
+  </script>
+
+<style>
+    body {
+      background-image: url('{{ asset('img/bg.jpg') }}');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      z-index: 1;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(2px);
+    }
+
+    .main-content,
+    .main-content p,
+    .card-body,
+    .container-fluid,
+    .content,
+    .alert,
+    .navbar .card {
+      text-align: justify;
+      line-height: 1.6;
+    }
+
+    .main-content {
+      background-color: rgba(255, 255, 255, 0.96);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      margin-top: 20px;
+      padding: 20px;
+    }
+
+    .navbar {
+      background-color: white !important;
+      color: #333 !important;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .navbar .card {
+      background-color: #f8f9fa !important;
+      color: #333;
+    }
+
+    .sidenav {
+      background-color: #ffffffee;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-link {
+      color: #333;
+      font-weight: 500;
+    }
+
+    .nav-link.active {
+      background-color: #f1f1f1 !important;
+      color: #000 !important;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+
+    .nav-link:hover {
+      background-color: #e9ecef;
+      border-radius: 8px;
+    }
+
+    .card {
+      background-color: white;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      color: #155724;
+      font-weight: 600;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.4em 0.6em;
+    }
+  </style>
+
+
 </body>
 </html>

@@ -6,7 +6,7 @@
     <a href="{{ route('produk-keluars.create') }}" class="btn btn-primary">Tambah Produk Keluar</a>
 </div>
 
-<table class="table table-bordered">
+<table id="example" class="table table-bordered">
     <thead class="table-dark">
         <tr>
             <th>Kode Produk</th>
