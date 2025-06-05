@@ -31,7 +31,7 @@ class ProdukController extends Controller
             'supplier_id' => 'required|exists:suppliers,id',
         ]);
 
-        // Generate kode_produk otomatis
+        // Generate kode_produk secara otomatis
         $last = Produk::orderBy('id', 'desc')->first();
         $nextId = $last ? $last->id + 1 : 1;
         $kode_produk = 'P' . str_pad($nextId, 4, '0', STR_PAD_LEFT);

@@ -43,7 +43,7 @@
         <label>Stok</label>
         <input type="number" class="form-control" value="0" readonly>
         <input type="hidden" name="stok" value="0">
-        <small class="text-muted">Stok awal akan otomatis 0, dan hanya bisa bertambah lewat transaksi produk masuk.</small>
+        <small class="text-muted">Stok awal akan otomatis 0, dan hanya bisa bertambah lewat produk masuk.</small>
     </div>  
     <button class="btn btn-primary">Simpan</button>
     <a href="{{ route('produks.index') }}" class="btn btn-secondary">Kembali</a>

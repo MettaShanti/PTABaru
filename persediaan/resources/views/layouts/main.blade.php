@@ -11,17 +11,17 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 
-  {{-- Fonts and icons --}}
+  <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.7') }}" rel="stylesheet" />
 
-  {{-- SweetAlert --}}
+  <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  {{-- Optional analytics --}}
+  <!-- Optional analytics -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
   
     <!-- DataTables CSS -->
@@ -32,12 +32,15 @@
 
 
 <body class="g-sidenav-show bg-gray-100">
-  {{-- SIDEBAR --}}
+  <!-- Sidenav -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-xl-none" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#">
-        <span class="ms-1 font-weight-bold">Persediaan Produk CV Jaya Abadi</span>
+      <div class="text-center">
+          <span class="d-block font-weight-bold">Persediaan Produk</span>
+          <span class="d-block font-weight-bold">CV Jaya Abadi</span>
+      </div>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -51,7 +54,7 @@
           </a>
         </li>
 
-        {{-- Admin Menu --}}
+        <!-- Admin Menu -->
         @auth
           @if(Auth::user()->level == 'admin')
             <li class="nav-item">
@@ -91,7 +94,7 @@
           @endif
         @endauth
 
-        {{-- Laporan --}}
+        <!-- Laporan -->
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#laporanMenu" class="nav-link" aria-controls="laporanMenu" role="button" aria-expanded="false">
             <i class="fas fa-file-alt me-2"></i><span class="nav-link-text ms-1">Laporan</span>
@@ -117,7 +120,7 @@
           </div>
         </li>
 
-        {{-- Logout --}}
+        <!-- Logout -->
         <li class="nav-item mt-3">
           <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -130,17 +133,14 @@
     </div>
   </aside>
 
-  {{-- MAIN CONTENT --}}
+  <!-- MAIN CONTENT -->
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-    {{-- Navbar --}}
+    <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <!-- <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="#">Pages</a></li> -->
-            <!-- <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li> -->
           </ol>
-          <!-- <h6 class="font-weight-bolder mb-0">Dashboard</h6> -->
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
@@ -164,7 +164,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
       @endif
 
-  {{-- CHART (tampilkan hanya di dashboard) --}}
+  <!-- tampilkan hanya di dashboard -->
   @if(request()->routeIs('dashboard') && isset($labels, $stokData, $produkMasukData, $produkKeluarData))
     <div class="card mb-4">
       <div class="card-header pb-0">
@@ -178,7 +178,7 @@
 
   @yield('content')
 
-
+<!-- menampilkan grafik -->
 @isset($labels, $stokData, $produkMasukData, $produkKeluarData)
 <script>
     const labels = {!! json_encode($labels) !!};
@@ -223,7 +223,7 @@
               legend: { position: 'top' },
               title: {
                 display: true,
-                text: 'Grafik Tren Stok Produk'
+                text: 'Grafik Stok Produk'
               }
             }
           }
@@ -233,7 +233,7 @@
 </script>
 @endisset
 
-
+<!-- Setting bg gambar -->
   <style>
     .badge {
       font-size: 0.75rem;
@@ -248,10 +248,9 @@
     border-radius: 12px;
     margin-bottom: 20px;
   }
-
   </style>
 
-  {{-- Scripts --}}
+  <!-- Scripts -->
   <script src="{{ asset('js/core/popper.min.js') }}"></script>
   <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -261,11 +260,12 @@
 
   @yield('scripts')
 
-  {{-- DataTables Scripts --}}
+  <!-- DataTables Scripts -->
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
   <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
   <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -273,12 +273,13 @@
       if (table) {
         new DataTable('#example', {
           scrollX: true
-          // responsive: true // Optional: bisa aktifkan jika dibutuhkan
+          // responsive: true
         });
       }
     });
   </script>
 
+<!-- tampilan -->
 <style>
     body {
       background-image: url('{{ asset('img/bg.jpg') }}');
@@ -375,7 +376,5 @@
       padding: 0.4em 0.6em;
     }
   </style>
-
-
 </body>
 </html>

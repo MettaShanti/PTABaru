@@ -26,8 +26,15 @@
     </div>
     <div class="mb-3">
         <label>Status</label>
-        <input type="text" name="status" class="form-control" value="{{ $produkKeluar->status }}" required>
+        <select name="status" class="form-control" required>
+            <option value="">Pilih Status</option>
+            <option value="terjual" {{ $produkKeluar->status == 'terjual' ? 'selected' : '' }}>Terjual</option>
+            <option value="retur" {{ $produkKeluar->status == 'retur' ? 'selected' : '' }}>Retur</option>
+            <option value="exp" {{ $produkKeluar->status == 'exp' ? 'selected' : '' }}>Expired</option>
+            <option value="rusak" {{ $produkKeluar->status == 'rusak' ? 'selected' : '' }}>Rusak</option>
+        </select>
     </div>
+
     <button class="btn btn-primary">Update</button>
     <a href="{{ route('produk-keluars.index') }}" class="btn btn-secondary">Kembali</a>
 </form>

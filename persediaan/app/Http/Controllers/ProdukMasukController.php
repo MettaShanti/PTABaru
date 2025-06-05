@@ -47,11 +47,6 @@ class ProdukMasukController extends Controller
         return redirect()->route('produk-masuks.index')->with('success', 'Produk masuk berhasil ditambahkan dan stok bertambah.');
     }
 
-    public function show(ProdukMasuk $produkMasuk)
-    {
-        //return view('produk_masuks.show', compact('produkMasuk'));
-    }
-
     public function edit(ProdukMasuk $produkMasuk)
     {
         $produks = Produk::all();

@@ -19,7 +19,7 @@ class DashboardController extends Controller
         session()->flash('notif_count', $stokNotif['total']);
     }
 
-    // Ambil semua nama produk
+    // mengambil semua nama produk
     $produk = Produk::orderBy('nama_produk')->get();
     $labels = $produk->pluck('nama_produk')->toArray();
 
@@ -27,13 +27,13 @@ class DashboardController extends Controller
     $stokDataRaw = Stok::all()->keyBy('nama_produk');
     $stokData = collect($labels)->map(fn($nama) => $stokDataRaw[$nama]->stok_akhir ?? 0);
 
-    // Data Produk Masuk
+    // Data produk masuk
     $produkMasukRaw = ProdukMasuk::with('produk')->get()
         ->groupBy('produk.nama_produk')
         ->map(fn($item) => $item->sum('jumlah'));
     $produkMasukData = collect($labels)->map(fn($nama) => $produkMasukRaw[$nama] ?? 0);
 
-    // Data Produk Keluar
+    // Data produk keluar
     $produkKeluarRaw = ProdukKeluar::with('produk')->get()
         ->groupBy('produk.nama_produk')
         ->map(fn($item) => $item->sum('jumlah'));
