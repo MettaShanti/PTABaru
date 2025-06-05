@@ -12,7 +12,12 @@
     </style>
 </head>
 <body>
+
     <h2>Laporan Stok Produk</h2>
+
+    <div class="printed-date">
+        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y H:i') }}
+    </div>
 
     @if ($request->nama_produk)
         <p><strong>Filter Nama Produk:</strong> {{ $request->nama_produk }}</p>

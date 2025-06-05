@@ -21,11 +21,6 @@ class LaporanController extends Controller
         if ($request->filled('tanggal_akhir')) {
             $query->whereDate('tgl_masuk', '<=', $request->tanggal_akhir);
         }
-        if ($request->filled('nama_produk')) {
-            $query->whereHas('produk', function ($q) use ($request) {
-                $q->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
-            });
-        }
 
         $produkMasuks = $query->orderBy('tgl_masuk', 'desc')->get();
 
@@ -42,11 +37,6 @@ class LaporanController extends Controller
         }
         if ($request->filled('tanggal_akhir')) {
             $query->whereDate('tgl_masuk', '<=', $request->tanggal_akhir);
-        }
-        if ($request->filled('nama_produk')) {
-            $query->whereHas('produk', function ($q) use ($request) {
-                $q->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
-            });
         }
 
         $produkMasuks = $query->orderBy('tgl_masuk', 'desc')->get();
@@ -67,12 +57,6 @@ class LaporanController extends Controller
         if ($request->filled('tanggal_akhir')) {
             $query->whereDate('tgl_keluar', '<=', $request->tanggal_akhir);
         }
-        if ($request->filled('nama_produk')) {
-            $query->whereHas('produk', function ($q) use ($request) {
-                $q->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
-            });
-        }
-
         $produkKeluar = $query->orderBy('tgl_keluar', 'desc')->get();
 
         return view('laporanpk.index', compact('produkKeluar', 'request'));
@@ -89,11 +73,6 @@ class LaporanController extends Controller
         if ($request->filled('tanggal_akhir')) {
             $query->whereDate('tgl_keluar', '<=', $request->tanggal_akhir);
         }
-        if ($request->filled('nama_produk')) {
-            $query->whereHas('produk', function ($q) use ($request) {
-                $q->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
-            });
-        }
 
         $produkKeluar = $query->orderBy('tgl_keluar', 'desc')->get();
 
@@ -107,10 +86,6 @@ class LaporanController extends Controller
     {
         $query = Stok::query();
 
-        // Filter berdasarkan nama produk
-        if ($request->filled('nama_produk')) {
-            $query->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
-        }
 
         // Filter berdasarkan tanggal produksi
         if ($request->filled('tanggal_awal')) {
@@ -129,10 +104,6 @@ class LaporanController extends Controller
     public function cetakLaporanStokPdf(Request $request)
     {
         $query = Stok::query();
-
-        if ($request->filled('nama_produk')) {
-            $query->where('nama_produk', 'like', '%' . $request->nama_produk . '%');
-        }
             
         // Filter berdasarkan tanggal produksi
         if ($request->filled('tanggal_awal')) {

@@ -1,4 +1,4 @@
-@extends('layouts.main') 
+@extends('layouts.main')
 
 @section('content')
 <div class="card">
@@ -15,10 +15,6 @@
                 <label for="tanggal_akhir" class="form-label">Tanggal Akhir</label>
                 <input type="date" id="tanggal_akhir" name="tanggal_akhir" class="form-control" value="{{ request('tanggal_akhir') }}">
             </div>
-            <div class="col-md-4">
-                <label for="nama_produk" class="form-label">Nama Produk</label>
-                <input type="text" id="nama_produk" name="nama_produk" class="form-control" value="{{ request('nama_produk') }}" placeholder="Cari Nama Produk">
-            </div>
             <div class="col-md-2 d-flex align-items-end gap-2">
                 <button class="btn btn-primary w-50" type="submit">Filter</button>
                 <a href="{{ route('laporan.produk-keluar.cetak', request()->all()) }}" target="_blank" class="btn btn-success w-50">
@@ -27,7 +23,7 @@
             </div>
         </form>
 
-        <table class="table table-bordered table-striped">
+        <table id="example" class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
                     <th>Kode Produk</th>
@@ -50,7 +46,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center text-muted">Tidak ada data produk keluar</td>
+                    <td colspan="6" class="text-center text-muted">Tidak ada data produk keluar</td>
                 </tr>
                 @endforelse
             </tbody>

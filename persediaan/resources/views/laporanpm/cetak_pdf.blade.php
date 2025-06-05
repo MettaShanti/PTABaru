@@ -14,12 +14,14 @@
     </style>
 </head>
 <body>
-    <div class="printed-date">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y H:i') }}
-    </div>
 
     <h3 style="text-align:center;">Laporan Produk Masuk</h3>
 
+
+    <div class="printed-date">
+        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y H:i') }}
+    </div> 
+    
     <table>
         <thead>
             <tr>
