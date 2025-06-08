@@ -12,12 +12,12 @@ class DashboardController extends Controller
 {
     public function index()
 {
-    // Notifikasi stok
-    $stokNotif = Stok::getStokNotifications();
-    if ($stokNotif['total'] > 0) {
-        session()->flash('stok_alert', $stokNotif['message']);
-        session()->flash('notif_count', $stokNotif['total']);
-    }
+    // // Notifikasi stok
+    // $stokNotif = Stok::getStokNotifications();
+    // if ($stokNotif['total'] > 0) {
+    //     session()->flash('stok_alert', $stokNotif['message']);
+    //     session()->flash('notif_count', $stokNotif['total']);
+    // }
 
     // mengambil semua nama produk
     $produk = Produk::orderBy('nama_produk')->get();

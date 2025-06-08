@@ -46,6 +46,7 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
+        
         {{-- Dashboard --}}
         <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
@@ -78,11 +79,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ request()->routeIs('stoks.index') ? 'active' : '' }}" href="{{ route('stoks.index') }}">
-                <i class="fas fa-box me-2"></i>
-                <span class="nav-link-text ms-1">Stok</span>
-                @if(session('notif_count'))
-                  <span class="badge bg-danger ms-auto">{{ session('notif_count') }}</span>
+              <a class="nav-link d-flex justify-content-between align-items-center {{ request()->routeIs('stoks.index') ? 'active' : '' }}" href="{{ route('stoks.index') }}">
+                <div>
+                  <i class="fas fa-box me-2"></i>
+                  <span class="nav-link-text ms-1">Stok</span>
+                </div>
+                @if(isset($notif_count) && $notif_count > 0)
+                  <span class="badge bg-danger">{{ $notif_count }}</span>
                 @endif
               </a>
             </li>
@@ -119,6 +122,7 @@
             </ul>
           </div>
         </li>
+
 
         <!-- Logout -->
         <li class="nav-item mt-3">
