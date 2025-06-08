@@ -45,8 +45,8 @@
                     <th>Total Masuk</th>
                     <th>Total Keluar</th>
                     <th>Stok Akhir</th>
-                    <th>Tgl Produksi Terakhir</th>
-                    <th>Tgl Exp Terakhir</th>
+                    <th>Tanggal Produksi</th>
+                    <th>Tanggal Expired</th>
                 </tr>
             </thead>
             <tbody>
