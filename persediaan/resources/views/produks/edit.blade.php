@@ -27,11 +27,11 @@
         </div>
         <div class="mb-3">
             <label>Satuan</label>
-            <select name="satuan" class="form-control" required>
+            <select name="satuan" class="form-control" value="{{ $produk->satuan }}" required>
                 <option value="">Pilih Satuan</option>
-                <option value="dus">Dus</option>
-                <option value="box">Box</option>
-                <option value="pack">Pack</option>
+                <option value="dus" {{ $produk->satuan == 'dus' ? 'selected' : '' }}>Dus</option>
+                <option value="box" {{ $produk->satuan == 'box' ? 'selected' : '' }}>Box</option>
+                <option value="pack" {{ $produk->satuan == 'pack' ? 'selected' : '' }}>Pack</option>
             </select>
         </div>
         <div class="mb-2">

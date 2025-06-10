@@ -69,7 +69,21 @@ class ProdukMasukController extends Controller
 
     public function destroy(ProdukMasuk $produkMasuk)
     {
+        // Kurangi stok saat data produk masuk dihapus
+        $produk = Produk::find($produkMasuk->produk_id);
+        if ($produk) {
+            // Pastikan stok tidak menjadi negatif
+            if ($produk->stok >= $produkMasuk->jumlah) {
+                $produk->stok -= $produkMasuk->jumlah;
+            } else {
+                $produk->stok = 0;
+            }
+            $produk->save();
+        }
+
         $produkMasuk->delete();
-        return redirect()->route('produk-masuks.index')->with('success', 'Produk masuk berhasil dihapus.');
+
+        return redirect()->route('produk-masuks.index')->with('success', 'Data produk masuk berhasil dihapus dan stok dikurangi.');
     }
+
 }
