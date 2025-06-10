@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tgl_keluar');
             $table->integer('jumlah');
             $table->string('satuan', 15);
-            $table->string('status');
+            $table->string('status', 15);
             $table->timestamps();
         });
     }
