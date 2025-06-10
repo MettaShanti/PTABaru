@@ -23,7 +23,7 @@ class ProdukMasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,id',
+            'produk_id' => 'required|exists:produks,kode_produk',
             'tgl_masuk' => 'required|date',
             'tgl_produksi' => 'required|date',
             'tgl_exp' => 'required|date',
@@ -56,7 +56,7 @@ class ProdukMasukController extends Controller
     public function update(Request $request, ProdukMasuk $produkMasuk)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,id',
+            'produk_id' => 'required|exists:produks,kode_produk',
             'tgl_masuk' => 'required|date',
             'tgl_produksi' => 'required|date',
             'tgl_exp' => 'required|date',

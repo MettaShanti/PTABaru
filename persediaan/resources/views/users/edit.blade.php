@@ -29,7 +29,7 @@
     @error('level')
         <span class="text-danger">({{ $message }})</span>
     @enderror 
-    <select name="role" class="form-control mb-2">
+    <select name="level" class="form-control mb-2">
         <option value="">-- Pilih Role --</option>
         <option value="admin" {{ $user['level'] == 'admin' ? 'selected' : '' }}>admin</option>
         <option value="pemilik" {{ $user['level'] == 'pemilik' ? 'selected' : '' }}>pemilik</option>

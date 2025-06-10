@@ -10,11 +10,7 @@
         <label>Nama</label>
         <input type="text" name="name" class="form-control" required>
     </div>
-    <div class="mb-3">
-        <label>Username</label>
-        <input type="text" name="username" class="form-control" required>
-    </div>
-    
+
     <div class="mb-3">
         <label>Email</label>
         <input type="email" name="email" class="form-control" required>
@@ -26,7 +22,7 @@
 
     <div class="mb-3">
         <label>Role</label>
-        <select name="role" class="form-control" required>
+        <select name="level" class="form-control" required>
             <option value="">-- Pilih Role --</option>
             <option value="admin">Admin</option>
             <option value="pemilik">Pemilik</option>

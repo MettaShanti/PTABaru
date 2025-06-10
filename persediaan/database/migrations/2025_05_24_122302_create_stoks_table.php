@@ -16,20 +16,20 @@ return new class extends Migration
         DB::statement("
             CREATE VIEW view_stok AS
             SELECT 
-                p.id AS produk_id,
+                p.kode_produk AS produk_id,
                 p.kode_produk,
                 p.nama_produk,
                 p.jenis,
                 p.satuan,
-                COALESCE(SUM(pm.jumlah),0) AS total_masuk,
-                COALESCE(SUM(pk.jumlah),0) AS total_keluar,
-                (COALESCE(SUM(pm.jumlah),0) - COALESCE(SUM(pk.jumlah),0)) AS stok_akhir,
+                COALESCE(SUM(pm.jumlah), 0) AS total_masuk,
+                COALESCE(SUM(pk.jumlah), 0) AS total_keluar,
+                (COALESCE(SUM(pm.jumlah), 0) - COALESCE(SUM(pk.jumlah), 0)) AS stok_akhir,
                 MAX(pm.tgl_produksi) AS tgl_produksi_terakhir,
                 MAX(pm.tgl_exp) AS tgl_exp_terakhir
             FROM produks p
-            LEFT JOIN produk_masuks pm ON pm.produk_id = p.id
-            LEFT JOIN produk_keluars pk ON pk.produk_id = p.id
-            GROUP BY p.id, p.kode_produk, p.nama_produk, p.jenis, p.satuan
+            LEFT JOIN produk_masuks pm ON pm.produk_id = p.kode_produk
+            LEFT JOIN produk_keluars pk ON pk.produk_id = p.kode_produk
+            GROUP BY p.kode_produk, p.nama_produk, p.jenis, p.satuan
         ");
     }
 

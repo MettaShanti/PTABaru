@@ -23,11 +23,11 @@ class ProdukKeluarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,id',
+            'produk_id' => 'required|exists:produks,kode_produk',
             'tgl_keluar' => 'required|date',
             'jumlah' => 'required|integer|min:1',
             'satuan' => 'required',
-            'status' => 'required',
+            'status' => 'required|string',
         ]);
 
         // Simpan data produk keluar
@@ -50,10 +50,6 @@ class ProdukKeluarController extends Controller
         return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil ditambahkan dan stok berkurang.');
     }
 
-    public function show(ProdukKeluar $produkKeluar)
-    {
-        //return view('produk_keluars.show', compact('produkKeluar'));
-    }
 
     public function edit(ProdukKeluar $produkKeluar)
     {
@@ -64,7 +60,7 @@ class ProdukKeluarController extends Controller
     public function update(Request $request, ProdukKeluar $produkKeluar)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,id',
+            'produk_id' => 'required|exists:produks,kode_produk',
             'tgl_keluar' => 'required|date',
             'jumlah' => 'required|integer|min:1',
             'satuan' => 'required|max:15',
@@ -79,6 +75,7 @@ class ProdukKeluarController extends Controller
                 $produkLama->stok += $produkKeluar->jumlah;
                 $produkLama->save();
             }
+
             // Kurangi stok baru
             $produkBaru = produk::findOrFail($request->produk_id);
             if ($produkBaru->stok < $request->jumlah) {

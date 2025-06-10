@@ -30,8 +30,8 @@
             <td>{{ $produk->satuan }}</td>
             <td>{{ $produk->supplier->nama ?? '-' }}</td>
             <td>
-                <a href="{{ route('produks.edit', $produk) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('produks.destroy', $produk) }}" method="POST" style="display:inline;">
+                <a href="{{ route('produks.edit', $produk->kode_produk) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('produks.destroy', $produk->kode_produk) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
                     <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
                 </form>

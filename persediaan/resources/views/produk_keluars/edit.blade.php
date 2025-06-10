@@ -4,14 +4,12 @@
 <h2>Edit Produk Keluar</h2>
 <form action="{{ route('produk-keluars.update', $produkKeluar) }}" method="POST">
     @csrf @method('PUT')
-    <div class="mb-3">
-        <label>Produk</label>
-        <select name="produk_id" class="form-control" required>
-            @foreach($produks as $produk)
-                <option value="{{ $produk->id }}" {{ $produkKeluar->produk_id == $produk->id ? 'selected' : '' }}>{{ $produk->nama_produk }}</option>
-            @endforeach
-        </select>
-    </div>
+    <select name="produk_id" class="form-control" required>
+    <option value="">Pilih Produk</option>
+    @foreach($produks as $produk)
+        <option value="{{ $produk->kode_produk }}" {{ $produkKeluar->produk_id == $produk->kode_produk ? 'selected' : '' }}>{{ $produk->nama_produk }} ({{ $produk->kode_produk }})</option>
+    @endforeach
+</select>
     <div class="mb-3">
         <label>Tgl Keluar</label>
         <input type="date" name="tgl_keluar" class="form-control" value="{{ $produkKeluar->tgl_keluar }}" required>

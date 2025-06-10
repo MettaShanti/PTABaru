@@ -9,6 +9,10 @@ class Produk extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'kode_produk';
+    public $incrementing = false; // karena kode_produk bukan integer auto increment
+    protected $keyType = 'string';
+    
     protected $fillable = [
     'kode_produk', 
     'nama_produk', 

@@ -11,9 +11,16 @@ class produkKeluar extends Model
 
     protected $table = 'produk_keluars';
     protected $guarded = [];
+    protected $fillable = [
+        'produk_id',
+        'tgl_keluar',
+        'jumlah',
+        'satuan',
+        'status',
+    ];
 
     public function produk()
     {
-        return $this->belongsTo(Produk::class, 'produk_id');
+    return $this->belongsTo(Produk::class, 'produk_id', 'kode_produk');
     }
 }

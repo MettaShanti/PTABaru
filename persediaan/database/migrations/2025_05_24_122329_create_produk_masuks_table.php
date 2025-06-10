@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('produk_masuks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produk_id')->constrained('produks')->onDelete('cascade');
+            $table->string('produk_id', 10);
+            $table->foreign('produk_id')->references('kode_produk')->on('produks')->onDelete('cascade');
             $table->date('tgl_masuk');
             $table->date('tgl_produksi');
             $table->date('tgl_exp');
