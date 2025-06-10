@@ -37,7 +37,6 @@
         <table id="example" class="table table-bordered table-hover table-sm align-middle text-nowrap w-100">
             <thead class="table-dark text-center">
                 <tr>
-                    <th>No</th>
                     <th>Kode Produk</th>
                     <th>Nama Produk</th>
                     <th>Jenis</th>
@@ -63,7 +62,6 @@
                         }
                     @endphp
                     <tr class="{{ $rowClass }}">
-                        <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $stok->kode_produk }}</td>
                         <td>{{ $stok->nama_produk }}</td>
                         <td>{{ $stok->jenis }}</td>
