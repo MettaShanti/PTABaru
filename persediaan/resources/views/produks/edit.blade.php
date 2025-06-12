@@ -7,7 +7,7 @@
         @method('PUT')
         <div class="mb-2">
             <label>Kode Produk</label>
-            <input type="text" name="kode_produk" class="form-control" value="{{ $produk->kode_produk }}" required>
+            <input type="text" name="kode_produk" class="form-control" value="{{ $produk->kode_produk }}" required readonly>
         </div>
         <div class="mb-2">
             <label>Nama Produk</label>
@@ -32,6 +32,8 @@
                 <option value="dus" {{ $produk->satuan == 'dus' ? 'selected' : '' }}>Dus</option>
                 <option value="box" {{ $produk->satuan == 'box' ? 'selected' : '' }}>Box</option>
                 <option value="pack" {{ $produk->satuan == 'pack' ? 'selected' : '' }}>Pack</option>
+                <option value="gross" {{ $produk->satuan == 'gross' ? 'selected' : '' }}>Gross</option>
+                <option value="lusin" {{ $produk->satuan == 'lusin' ? 'selected' : '' }}>Lusin</option>
             </select>
         </div>
         <div class="mb-2">

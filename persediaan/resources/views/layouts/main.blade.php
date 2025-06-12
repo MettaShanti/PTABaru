@@ -122,8 +122,6 @@
             </ul>
           </div>
         </li>
-
-
         <!-- Logout -->
         <li class="nav-item mt-3">
           <form method="POST" action="{{ route('logout') }}">
@@ -284,7 +282,7 @@
   </script>
 
 <!-- tampilan -->
-<style>
+<!-- <style>
     body {
       background-image: url('{{ asset('img/bg.jpg') }}');
       background-size: cover;
@@ -324,13 +322,6 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       margin-top: 20px;
       padding: 20px;
-    }
-
-    .navbar {
-      background-color: white !important;
-      color: #333 !important;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .navbar .card {
@@ -379,6 +370,6 @@
       font-size: 0.75rem;
       padding: 0.4em 0.6em;
     }
-  </style>
+  </style> -->
 </body>
 </html>

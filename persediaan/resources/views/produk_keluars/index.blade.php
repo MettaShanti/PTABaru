@@ -28,10 +28,10 @@
             <td>{{ $pk->satuan }}</td>
             <td>{{ $pk->status }}</td>
             <td>
-                <a href="{{ route('produk-keluars.edit', $pk) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('produk-keluars.edit', $pk) }}" class="btn btn-xs btn-warning">Ubah</a>
                 <form action="{{ route('produk-keluars.destroy', $pk) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                    <button class="btn btn-xs btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
                 </form>
             </td>
         </tr>

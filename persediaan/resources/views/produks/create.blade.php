@@ -27,7 +27,9 @@
             <option value="">Pilih Satuan</option>
             <option value="dus">Dus</option>
             <option value="box">Box</option>
+            <option value="gross">Gross</option>
             <option value="pack">Pack</option>
+            <option value="lusin">Lusin</option>
         </select>
     </div>
     <div class="mb-3">

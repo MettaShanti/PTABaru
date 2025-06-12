@@ -6,7 +6,7 @@
     <a href="{{ route('produks.create') }}" class="btn btn-primary">Tambah Produk</a>
 </div>
 
-<table id="example" class="table table-bordered">
+<table id="example" class="table table-bordered" style="width:100%">
     <thead class="table-dark">
         <tr>
             <th>Kode Produk</th>
@@ -30,10 +30,10 @@
             <td>{{ $produk->satuan }}</td>
             <td>{{ $produk->supplier->nama ?? '-' }}</td>
             <td>
-                <a href="{{ route('produks.edit', $produk->kode_produk) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('produks.edit', $produk->kode_produk) }}" class="btn btn-xs btn-warning">Ubah</a>
                 <form action="{{ route('produks.destroy', $produk->kode_produk) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                    <button class="btn btn-xs btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
                 </form>
             </td>
         </tr>

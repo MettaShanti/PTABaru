@@ -28,10 +28,10 @@
             <td>{{ $pm->tgl_exp }}</td>
             <td>{{ $pm->jumlah }}</td>
             <td>
-                <a href="{{ route('produk-masuks.edit', $pm) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('produk-masuks.edit', $pm) }}" class="btn btn-xs btn-warning">Ubah</a>
                 <form action="{{ route('produk-masuks.destroy', $pm) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                    <button class="btn btn-xs btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
                 </form>
             </td>
         </tr>
