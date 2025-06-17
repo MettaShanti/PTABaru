@@ -21,6 +21,7 @@ class produkKeluar extends Model
 
     public function produk()
     {
-    return $this->belongsTo(Produk::class, 'produk_id', 'kode_produk');
+        return $this->belongsTo(Produk::class, 'produk_id', 'kode_produk');
     }
+
 }

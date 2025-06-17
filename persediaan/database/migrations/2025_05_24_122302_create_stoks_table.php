@@ -14,23 +14,37 @@ return new class extends Migration
     {
       
         DB::statement("
-            CREATE VIEW view_stok AS
+        CREATE OR REPLACE VIEW view_stok AS
+        SELECT 
+            p.kode_produk AS produk_id,
+            p.kode_produk,
+            p.nama_produk,
+            p.jenis,
+            p.satuan,
+            COALESCE(pm.total_masuk, 0) AS total_masuk,
+            COALESCE(pk.total_keluar, 0) AS total_keluar,
+            (COALESCE(pm.total_masuk, 0) - COALESCE(pk.total_keluar, 0)) AS stok_akhir,
+            pm.tgl_produksi_terakhir,
+            pm.tgl_exp_terakhir
+        FROM produks p
+        LEFT JOIN (
             SELECT 
-                p.kode_produk AS produk_id,
-                p.kode_produk,
-                p.nama_produk,
-                p.jenis,
-                p.satuan,
-                COALESCE(SUM(pm.jumlah), 0) AS total_masuk,
-                COALESCE(SUM(pk.jumlah), 0) AS total_keluar,
-                (COALESCE(SUM(pm.jumlah), 0) - COALESCE(SUM(pk.jumlah), 0)) AS stok_akhir,
-                MAX(pm.tgl_produksi) AS tgl_produksi_terakhir,
-                MAX(pm.tgl_exp) AS tgl_exp_terakhir
-            FROM produks p
-            LEFT JOIN produk_masuks pm ON pm.produk_id = p.kode_produk
-            LEFT JOIN produk_keluars pk ON pk.produk_id = p.kode_produk
-            GROUP BY p.kode_produk, p.nama_produk, p.jenis, p.satuan
-        ");
+                produk_id,
+                SUM(jumlah) AS total_masuk,
+                MAX(tgl_produksi) AS tgl_produksi_terakhir,
+                MAX(tgl_exp) AS tgl_exp_terakhir
+            FROM produk_masuks
+            GROUP BY produk_id
+        ) pm ON pm.produk_id = p.kode_produk
+        LEFT JOIN (
+            SELECT 
+                produk_id,
+                SUM(jumlah) AS total_keluar
+            FROM produk_keluars
+            GROUP BY produk_id
+        ) pk ON pk.produk_id = p.kode_produk
+    ");
+
     }
 
     /**

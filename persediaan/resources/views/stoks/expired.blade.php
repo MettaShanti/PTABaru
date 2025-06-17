@@ -4,10 +4,11 @@
 <div class="container">
     <h2 class="mb-4">Informasi Stok Expired</h2>
 
-    <h4 class="mt-4">Sudah Expired</h4>
+    {{-- Produk Sudah Expired --}}
+    <h4 class="mt-4">Sudah Expired (termasuk hari ini)</h4>
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="table-danger">
                 <th>Kode Produk</th>
                 <th>Nama Produk</th>
                 <th>Stok Akhir</th>
@@ -20,7 +21,7 @@
                 <td>{{ $stok->kode_produk }}</td>
                 <td>{{ $stok->nama_produk }}</td>
                 <td>{{ $stok->stok_akhir }}</td>
-                <td>{{ $stok->tgl_exp_terakhir  }}</td>
+                <td>{{ \Carbon\Carbon::parse($stok->tgl_exp_terakhir)->format('d-m-Y') }}</td>
             </tr>
             @empty
             <tr>
@@ -30,10 +31,11 @@
         </tbody>
     </table>
 
+    {{-- Produk Akan Expired --}}
     <h4 class="mt-4">Akan Expired (dalam 3 minggu ke depan)</h4>
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="table-warning">
                 <th>Kode Produk</th>
                 <th>Nama Produk</th>
                 <th>Stok Akhir</th>
@@ -46,7 +48,7 @@
                 <td>{{ $stok->kode_produk }}</td>
                 <td>{{ $stok->nama_produk }}</td>
                 <td>{{ $stok->stok_akhir }}</td>
-                <td>{{ $stok->tanggal_kadaluarsa }}</td>
+                <td>{{ \Carbon\Carbon::parse($stok->tgl_exp_terakhir)->format('d-m-Y') }}</td>
             </tr>
             @empty
             <tr>
