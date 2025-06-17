@@ -47,7 +47,7 @@ class ProdukKeluarController extends Controller
         $produk->stok -= $request->jumlah;
         $produk->save();
 
-        return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil ditambahkan dan stok berkurang.');
+        return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil ditambahkan dan stok berkurang');
     }
 
 
@@ -93,7 +93,7 @@ class ProdukKeluarController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil diupdate dan stok diperbarui.');
+        return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil diubah');
     }
 
     public function destroy(ProdukKeluar $produkKeluar)
@@ -105,6 +105,6 @@ class ProdukKeluarController extends Controller
             $produk->save();
         }
         $produkKeluar->delete();
-        return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil dihapus dan stok dikembalikan.');
+        return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil dihapus dan stok dikembalikan');
     }
 }

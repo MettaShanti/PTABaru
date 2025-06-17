@@ -29,7 +29,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'level' => $request->level,
         ]);
-        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan!');
+        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -48,14 +48,14 @@ class UserController extends Controller
             'level' => $request->level,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
-        return redirect()->route('users.index')->with('success', 'User berhasil diupdate!');
+        return redirect()->route('users.index')->with('success', 'User berhasil diubah');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus!');
+        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
     }
     
 }

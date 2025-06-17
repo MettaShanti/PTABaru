@@ -44,7 +44,7 @@ class ProdukMasukController extends Controller
         $produk->stok += $request->jumlah;
         $produk->save();
 
-        return redirect()->route('produk-masuks.index')->with('success', 'Produk masuk berhasil ditambahkan dan stok bertambah.');
+        return redirect()->route('produk-masuks.index')->with('success', 'Produk masuk berhasil ditambahkan dan stok bertambah');
     }
 
     public function edit(ProdukMasuk $produkMasuk)
@@ -64,7 +64,7 @@ class ProdukMasukController extends Controller
         ]);
 
         $produkMasuk->update($request->all());
-        return redirect()->route('produk-masuks.index')->with('success', 'Produk masuk berhasil diupdate.');
+        return redirect()->route('produk-masuks.index')->with('success', 'Produk masuk berhasil diubah');
     }
 
     public function destroy(ProdukMasuk $produkMasuk)
@@ -83,7 +83,7 @@ class ProdukMasukController extends Controller
 
         $produkMasuk->delete();
 
-        return redirect()->route('produk-masuks.index')->with('success', 'Data produk masuk berhasil dihapus dan stok dikurangi.');
+        return redirect()->route('produk-masuks.index')->with('success', 'Data produk masuk berhasil dihapus dan stok dikurangi');
     }
 
 }

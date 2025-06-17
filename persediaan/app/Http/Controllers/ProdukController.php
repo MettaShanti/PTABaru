@@ -54,7 +54,7 @@ class ProdukController extends Controller
         'supplier_id' => $request->supplier_id,
     ]);
 
-    return redirect()->route('produks.index')->with('success', 'Produk berhasil ditambahkan.');
+    return redirect()->route('produks.index')->with('success', 'Produk berhasil ditambahkan');
 }
 
 
@@ -85,13 +85,13 @@ class ProdukController extends Controller
         'supplier_id' => $request->supplier_id,
     ]);
 
-    return redirect()->route('produks.index')->with('success', 'Produk berhasil diupdate.');
+    return redirect()->route('produks.index')->with('success', 'Produk berhasil diubah');
 }
 
 
     public function destroy(Produk $produk)
     {
         $produk->delete();
-        return redirect()->route('produks.index')->with('success', 'Produk berhasil dihapus.');
+        return redirect()->route('produks.index')->with('success', 'Produk berhasil dihapus');
     }
 }

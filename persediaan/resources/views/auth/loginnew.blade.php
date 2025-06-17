@@ -20,8 +20,10 @@
         backdrop-filter: blur(10px);
         background-color: rgba(255, 255, 255, 0.85);
       }
-</style>
-
+      .text-danger {
+        font-size: 0.875em;
+      }
+  </style>
 </head>
 <body>
   <div class="container d-flex align-items-center justify-content-center" style="min-height:100vh;">
@@ -30,21 +32,21 @@
         <div class="card shadow-lg">
           <div class="card-body p-4">
             <div class="text-center mb-4">
-              <!-- <img src="{{ asset('img/apple-icon.png') }}" width="60" alt="Logo"> -->
               <h4 class="mt-2 mb-0 font-weight-bold">Login</h4>
               <small class="text-muted">Persediaan Produk CV Jaya Abadi</small>
             </div>
             @if(session('error'))
               <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <form method="POST" action="{{ route('login') }}">
+            <form id="loginForm" method="POST" action="{{ route('login') }}">
               @csrf
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <div class="input-group input-group-outline">
                   <span class="input-group-text"><i class="fa fa-user"></i></span>
-                  <input type="email" name="email" id="email" class="form-control" required autofocus placeholder="Masukkan email">
+                  <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email">
                 </div>
+                <small id="emailError" class="text-danger"></small>
                 @error('email')
                   <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -53,8 +55,9 @@
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group input-group-outline">
                   <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                  <input type="password" name="password" id="password" class="form-control" required placeholder="Masukkan password">
+                  <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password">
                 </div>
+                <small id="passwordError" class="text-danger"></small>
                 @error('password')
                   <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -69,5 +72,39 @@
       </div>
     </div>
   </div>
+
+  <!--VALIDASI FORM LOGIN -->
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      let isValid = true;
+
+      const username = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const usernameError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+
+      // Reset error messages
+      usernameError.textContent = '';
+      passwordError.textContent = '';
+
+      // Validate email
+      if (username === '') {
+        usernameError.textContent = 'Email tidak boleh kosong.';
+        isValid = false;
+      }
+
+      // Validate password
+      if (password === '') {
+        passwordError.textContent = 'Password tidak boleh kosong.';
+        isValid = false;
+      }
+
+      // Prevent form submission if not valid
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
