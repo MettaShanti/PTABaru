@@ -13,10 +13,16 @@
             <label>Nama Produk</label>
             <input type="text" name="nama_produk" class="form-control" value="{{ $produk->nama_produk }}" required>
         </div>
-        <div class="mb-2">
-            <label>Jenis</label>
-            <input type="text" name="jenis" class="form-control" value="{{ $produk->jenis }}" required>
-        </div>
+        <div class="mb-3">
+        <label>Jenis</label>
+        <select name="jenis" class="form-control" value="{{ $produk->jenis }}" required>
+            <option value="">Pilih Jenis</option>
+            <option value="makanan"{{ $produk->jenis == 'makanan' ? 'selected' : '' }}>Makanan</option>
+            <option value="snack"{{ $produk->jenis == 'snack' ? 'selected' : '' }}>Snack</option>
+            <option value="minuman"{{ $produk->jenis == 'minuman' ? 'selected' : '' }}>Minuman</option>
+            <option value="olahan"{{ $produk->jenis == 'olahan' ? 'selected' : '' }}>Olahan</option>
+        </select>
+    </div>
         <div class="mb-2">
             <label>Harga</label>
             <input type="number" name="harga" class="form-control" value="{{ $produk->harga }}" required>

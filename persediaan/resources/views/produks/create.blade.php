@@ -9,12 +9,13 @@
         <input type="text" name="nama_produk" class="form-control" required>
     </div>
     <div class="mb-3">
-        <label>Kategori</label>
+        <label>Jenis</label>
         <select name="jenis" class="form-control" required>
-            <option value="">Pilih Kategori</option>
+            <option value="">Pilih Jenis</option>
             <option value="makanan">Makanan</option>
             <option value="snack">Snack</option>
             <option value="minuman">Minuman</option>
+            <option value="olahan">Olahan</option>
         </select>
     </div>
     <div class="mb-3">

@@ -10,7 +10,7 @@ class StokController extends Controller
 {
     public function index(Request $request)
     {
-        $today = Carbon::now()->startOfDay(); // penting: hilangkan jam!
+        $today = Carbon::now()->startOfDay();
         $query = Stok::query();
 
         if ($request->filled('from') && $request->filled('to')) {

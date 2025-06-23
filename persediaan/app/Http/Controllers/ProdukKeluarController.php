@@ -67,9 +67,9 @@ class ProdukKeluarController extends Controller
             'status' => 'required|string',
         ]);
 
-        // Jika produk atau jumlah berubah, update stok
+        // Jika produk atau jumlah berubah maka akan update stok
         if ($produkKeluar->produk_id != $request->produk_id || $produkKeluar->jumlah != $request->jumlah) {
-            // untuk Kembalikan stok lama
+            // untuk mengembalikan stok lama
             $produkLama = Produk::find($produkKeluar->produk_id);
             if ($produkLama) {
                 $produkLama->stok += $produkKeluar->jumlah;
