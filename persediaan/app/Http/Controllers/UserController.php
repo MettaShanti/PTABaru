@@ -22,7 +22,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // ...validasi...
         User::create([
             'name' => $request->name,
             'email' => $request->email,

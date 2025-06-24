@@ -21,9 +21,9 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|max:30',
-            'alamat' => 'required|max:50',
-            'nohp' => 'required|max:15',
+            'nama'   => 'required',
+            'alamat' => 'required',
+            'nohp'   => 'required',
         ]);
 
         Supplier::create($request->all());
@@ -38,9 +38,9 @@ class SupplierController extends Controller
     public function update(Request $request, Supplier $supplier)
     {
         $request->validate([
-            'nama' => 'required|max:30',
-            'alamat' => 'required|max:50',
-            'nohp' => 'required|max:15',
+            'nama'   => 'required',
+            'alamat' => 'required',
+            'nohp'   => 'required',
         ]);
 
         $supplier->update($request->all());

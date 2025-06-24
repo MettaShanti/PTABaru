@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
         <h2 class="mb-0">Data Stok</h2>
 
-        <!-- Tombol Produk Expired -->
+        <!-- Tombol Informasi Produk Expired -->
         <button type="button" class="btn btn-warning position-relative mt-2 mt-md-0" data-bs-toggle="modal" data-bs-target="#modalExpired">
             <i class="fas fa-exclamation-triangle me-1"></i> Produk Expired
             @if(session('notif_count', 0) > 0)
@@ -16,7 +16,7 @@
         </button>
     </div>
 
-    <!-- Filter Tanggal Exp -->
+    <!-- Filter Tanggal -->
     <form action="{{ route('stoks.index') }}" method="GET" class="row g-3 align-items-center mb-4">
         <div class="col-md-3">
             <label for="from" class="form-label">Dari Tanggal Exp</label>
@@ -50,17 +50,18 @@
             </thead>
             <tbody>
                 @forelse($stoks as $stok)
-                    @php
-                        $exp = \Carbon\Carbon::parse($stok->tgl_exp_terakhir);
-                        $today = now();
-                        $rowClass = '';
+                   @php
+                      $exp = \Carbon\Carbon::parse($stok->tgl_exp_terakhir);
+                      $today = now()->startOfDay();
+                      $expired_limit = $today->copy()->addDays(3); // Expired ≤ 3 hari dari sekarang
+                      $rowClass = '';
 
-                        if ($exp->lt($today)) {
-                            $rowClass = 'table-danger';
-                        } elseif ($exp->lte($today->copy()->addDays(21))) {
-                            $rowClass = 'table-warning';
-                        }
-                    @endphp
+                      if ($exp->lte($expired_limit)) {
+                          $rowClass = 'table-danger'; // Dianggap sudah expired
+                      } elseif ($exp->lte($today->copy()->addDays(21))) {
+                          $rowClass = 'table-warning'; // Akan expired dalam 3 minggu
+                      }
+                  @endphp
                     <tr class="{{ $rowClass }}">
                         <td>{{ $stok->kode_produk }}</td>
                         <td>{{ $stok->nama_produk }}</td>

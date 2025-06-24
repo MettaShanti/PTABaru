@@ -24,11 +24,11 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_produk' => 'required|max:30',
-            'jenis' => 'required|max:15',
-            'harga' => 'required|integer',
-            'stok' => 'required|integer',
-            'satuan' => 'required|max:20',
+            'nama_produk' => 'required',
+            'jenis'       => 'required',
+            'harga'       => 'required',
+            'stok'        => 'required',
+            'satuan'      => 'required',
             'supplier_id' => 'required|exists:suppliers,id',
         ]);
 
@@ -47,10 +47,10 @@ class ProdukController extends Controller
         Produk::create([
             'kode_produk' => $kode_produk,
             'nama_produk' => $request->nama_produk,
-            'jenis' => $request->jenis,
-            'harga' => $request->harga,
-            'stok' => $request->stok, 
-            'satuan' => $request->satuan,
+            'jenis'       => $request->jenis,
+            'harga'       => $request->harga,
+            'stok'        => $request->stok, 
+            'satuan'      => $request->satuan,
             'supplier_id' => $request->supplier_id,
         ]);
 
@@ -78,10 +78,10 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($kode_produk); // karena kode_produk adalah primary key
         $produk->update([
             'nama_produk' => $request->nama_produk,
-            'jenis' => $request->jenis,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'satuan' => $request->satuan,
+            'jenis'       => $request->jenis,
+            'harga'       => $request->harga,
+            'stok'        => $request->stok,
+            'satuan'      => $request->satuan,
             'supplier_id' => $request->supplier_id,
         ]);
 

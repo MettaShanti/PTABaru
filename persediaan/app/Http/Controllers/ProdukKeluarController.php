@@ -23,20 +23,20 @@ class ProdukKeluarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,kode_produk',
-            'tgl_keluar' => 'required|date',
-            'jumlah' => 'required|integer|min:1',
-            'satuan' => 'required',
-            'status' => 'required|string',
+            'produk_id'  => 'required|exists:produks,kode_produk',
+            'tgl_keluar' => 'required',
+            'jumlah'     => 'required|integer|min:1',
+            'satuan'     => 'required',
+            'status'     => 'required',
         ]);
 
         // Simpan data produk keluar
         $produkKeluar = ProdukKeluar::create([
-            'produk_id' => $request->produk_id,
+            'produk_id'  => $request->produk_id,
             'tgl_keluar' => $request->tgl_keluar,
-            'jumlah' => $request->jumlah,
-            'satuan' => $request->satuan,
-            'status' => $request->status,
+            'jumlah'     => $request->jumlah,
+            'satuan'     => $request->satuan,
+            'status'     => $request->status,
         ]);
 
         // Kurangi stok pada tabel produks
@@ -60,11 +60,11 @@ class ProdukKeluarController extends Controller
     public function update(Request $request, ProdukKeluar $produkKeluar)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,kode_produk',
-            'tgl_keluar' => 'required|date',
-            'jumlah' => 'required|integer|min:1',
-            'satuan' => 'required|max:15',
-            'status' => 'required|string',
+            'produk_id'  => 'required|exists:produks,kode_produk',
+            'tgl_keluar' => 'required',
+            'jumlah'     => 'required|integer|min:1',
+            'satuan'     => 'required',
+            'status'     => 'required',
         ]);
 
         // Jika produk atau jumlah berubah maka akan update stok
@@ -86,11 +86,11 @@ class ProdukKeluarController extends Controller
         }
 
         $produkKeluar->update([
-            'produk_id' => $request->produk_id,
+            'produk_id'  => $request->produk_id,
             'tgl_keluar' => $request->tgl_keluar,
-            'jumlah' => $request->jumlah,
-            'satuan' => $request->satuan,
-            'status' => $request->status,
+            'jumlah'     => $request->jumlah,
+            'satuan'     => $request->satuan,
+            'status'     => $request->status,
         ]);
 
         return redirect()->route('produk-keluars.index')->with('success', 'Produk keluar berhasil diubah');

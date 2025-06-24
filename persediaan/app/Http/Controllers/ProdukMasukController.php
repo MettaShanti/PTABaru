@@ -23,20 +23,20 @@ class ProdukMasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,kode_produk',
-            'tgl_masuk' => 'required|date',
-            'tgl_produksi' => 'required|date',
-            'tgl_exp' => 'required|date',
-            'jumlah' => 'required|integer|min:1',
+            'produk_id'    => 'required|exists:produks,kode_produk',
+            'tgl_masuk'    => 'required',
+            'tgl_produksi' => 'required',
+            'tgl_exp'      => 'required',
+            'jumlah'       => 'required|integer|min:1',
         ]);
 
         // Simpan data produk masuk
         $produkMasuk = ProdukMasuk::create([
-            'produk_id' => $request->produk_id,
-            'tgl_masuk' => $request->tgl_masuk,
+            'produk_id'    => $request->produk_id,
+            'tgl_masuk'    => $request->tgl_masuk,
             'tgl_produksi' => $request->tgl_produksi,
-            'tgl_exp' => $request->tgl_exp,
-            'jumlah' => $request->jumlah,
+            'tgl_exp'      => $request->tgl_exp,
+            'jumlah'       => $request->jumlah,
         ]);
 
         // Tambahkan stok pada tabel produks
@@ -56,11 +56,11 @@ class ProdukMasukController extends Controller
     public function update(Request $request, ProdukMasuk $produkMasuk)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,kode_produk',
-            'tgl_masuk' => 'required|date',
-            'tgl_produksi' => 'required|date',
-            'tgl_exp' => 'required|date',
-            'jumlah' => 'required|integer',
+            'produk_id'    => 'required|exists:produks,kode_produk',
+            'tgl_masuk'    => 'required',
+            'tgl_produksi' => 'required',
+            'tgl_exp'      => 'required',
+            'jumlah'       => 'required|integer',
         ]);
 
         $produkMasuk->update($request->all());

@@ -19,16 +19,17 @@ class StokController extends Controller
 
         $stoks = $query->get();
 
-        // Perbaiki expired agar <= hari ini (bukan hanya <)
-        $expired = Stok::whereDate('tgl_exp_terakhir', '<=', $today)->get();
+        // Produk dianggap expired jika <= hari ini + 3 hari
+        $expired_limit = $today->copy()->addDays(3);
+        $expired = Stok::whereDate('tgl_exp_terakhir', '<=', $expired_limit)->get();
 
-        // Perbaiki will_expired mulai besok sampai 3 minggu ke depan
+        // Produk akan expired dimulai 4 hari dari sekarang sampai 3 minggu ke depan
         $will_expired = Stok::whereBetween('tgl_exp_terakhir', [
-            $today->copy()->addDay(),
+            $today->copy()->addDays(4),
             $today->copy()->addWeeks(3)->endOfDay()
         ])->get();
 
-        // Session notif seperti sebelumnya
+        // Session notif
         $will_expired_count = $will_expired->count();
         if ($will_expired_count > 0) {
             session([
@@ -50,16 +51,20 @@ class StokController extends Controller
 
     public function expired()
     {
-        // pastikan hanya tanggal, tanpa waktu
         $now = Carbon::now()->startOfDay();
+        $expired_limit = $now->copy()->addDays(3);
         $in3Weeks = $now->copy()->addWeeks(3)->endOfDay();
 
-        // Ambil data expired hingga hari ini
-        $expired = Stok::whereDate('tgl_exp_terakhir', '<=', $now)->get();
+        // Produk dianggap expired jika <= 3 hari dari sekarang
+        $expired = Stok::whereDate('tgl_exp_terakhir', '<=', $expired_limit)->get();
 
-        // Ambil data yang akan expired dalam 3 minggu ke depan (mulai besok)
-        $will_expired = Stok::whereBetween('tgl_exp_terakhir', [$now->copy()->addDay(), $in3Weeks])->get();
+        // Produk yang akan expired dimulai dari 4 hari ke depan sampai 3 minggu
+        $will_expired = Stok::whereBetween('tgl_exp_terakhir', [
+            $now->copy()->addDays(4),
+            $in3Weeks
+        ])->get();
 
         return view('stoks.expired', compact('expired', 'will_expired'));
     }
+
 }
