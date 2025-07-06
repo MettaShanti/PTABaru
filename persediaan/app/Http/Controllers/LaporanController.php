@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProdukMasuk;
 use App\Models\ProdukKeluar;
 use App\Models\Stok;
+use App\Models\ViewLaporanStok;
 use PDF;
 
 class LaporanController extends Controller
@@ -84,8 +85,7 @@ class LaporanController extends Controller
     // Laporan Stok
     public function stok(Request $request)
     {
-        $query = Stok::query();
-
+        $query = ViewLaporanStok::query();
 
         // Filter berdasarkan tanggal produksi
         if ($request->filled('tanggal_awal')) {
@@ -103,8 +103,8 @@ class LaporanController extends Controller
     // Cetak laporan stok
     public function cetakLaporanStokPdf(Request $request)
     {
-        $query = Stok::query();
-            
+        $query = ViewLaporanStok::query();
+
         // Filter berdasarkan tanggal produksi
         if ($request->filled('tanggal_awal')) {
             $query->whereDate('tgl_produksi_terakhir', '>=', $request->tanggal_awal);
@@ -113,11 +113,11 @@ class LaporanController extends Controller
             $query->whereDate('tgl_produksi_terakhir', '<=', $request->tanggal_akhir);
         }
 
-
         $stokList = $query->orderBy('nama_produk')->get();
 
         $pdf = PDF::loadView('laporanstok.cetak_pdf', compact('stokList', 'request'));
 
         return $pdf->download('laporan-stok.pdf');
     }
+
 }

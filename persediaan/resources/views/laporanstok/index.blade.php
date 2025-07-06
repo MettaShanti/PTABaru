@@ -31,6 +31,7 @@
                         <th>Nama Produk</th>
                         <th>Jenis</th>
                         <th>Satuan</th>
+                        <th>Nama Supplier</th>
                         <th>Total Masuk</th>
                         <th>Total Keluar</th>
                         <th>Stok Akhir</th>
@@ -45,6 +46,7 @@
                             <td>{{ $stok->nama_produk }}</td>
                             <td>{{ $stok->jenis }}</td>
                             <td>{{ $stok->satuan }}</td>
+                            <td>{{ $stok->nama_supplier }}</td>
                             <td>{{ $stok->total_masuk }}</td>
                             <td>{{ $stok->total_keluar }}</td>
                             <td>{{ $stok->stok_akhir }}</td>

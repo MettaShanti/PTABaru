@@ -14,7 +14,7 @@
     </div>
     <div class="mb-3">
         <label>No HP</label>
-        <input type="text" name="nohp" class="form-control" value="{{ $supplier->nohp }}" required>
+        <input type="number" name="nohp" class="form-control" value="{{ $supplier->nohp }}" required>
     </div>
     <button class="btn btn-primary">Update</button>
     <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">Kembali</a>

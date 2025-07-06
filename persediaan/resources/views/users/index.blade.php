@@ -26,7 +26,6 @@
                     <form action="{{ route('users.destroy', $row->id) }}" method="post" style="display:inline">
                         @method('DELETE')
                         @csrf
-                        <button class="btn btn-xs btn-danger" onclick="return confirm('Yakin ingin hapus data ini?')">HAPUS</button>
                     </form>
                 </td>
             </tr>

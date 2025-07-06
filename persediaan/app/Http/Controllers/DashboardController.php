@@ -11,35 +11,49 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index()
-{
-    // // Notifikasi stok
-    // $stokNotif = Stok::getStokNotifications();
-    // if ($stokNotif['total'] > 0) {
-    //     session()->flash('stok_alert', $stokNotif['message']);
-    //     session()->flash('notif_count', $stokNotif['total']);
-    // }
+    {
+        // Label produk
+        $produk = Produk::orderBy('nama_produk')->get();
+        $labels = $produk->pluck('nama_produk')->toArray();
 
-    // mengambil semua nama produk
-    $produk = Produk::orderBy('nama_produk')->get();
-    $labels = $produk->pluck('nama_produk')->toArray();
+        // Stok akhir dari view_stok
+        $stokDataRaw = Stok::all()->keyBy('nama_produk');
+        $stokData = collect($labels)->map(fn($nama) => $stokDataRaw[$nama]->stok_akhir ?? 0);
 
-    // Data stok akhir dari view_stok
-    $stokDataRaw = Stok::all()->keyBy('nama_produk');
-    $stokData = collect($labels)->map(fn($nama) => $stokDataRaw[$nama]->stok_akhir ?? 0);
+        // Produk Masuk
+        $produkMasukRaw = ProdukMasuk::with('produk')->get()
+            ->groupBy('produk.nama_produk')
+            ->map(fn($item) => $item->sum('jumlah'));
+        $produkMasukData = collect($labels)->map(fn($nama) => $produkMasukRaw[$nama] ?? 0);
 
-    // Data produk masuk
-    $produkMasukRaw = ProdukMasuk::with('produk')->get()
-        ->groupBy('produk.nama_produk')
-        ->map(fn($item) => $item->sum('jumlah'));
-    $produkMasukData = collect($labels)->map(fn($nama) => $produkMasukRaw[$nama] ?? 0);
+        // Produk Keluar
+        $produkKeluarRaw = ProdukKeluar::with('produk')->get()
+            ->groupBy('produk.nama_produk')
+            ->map(fn($item) => $item->sum('jumlah'));
+        $produkKeluarData = collect($labels)->map(fn($nama) => $produkKeluarRaw[$nama] ?? 0);
 
-    // Data produk keluar
-    $produkKeluarRaw = ProdukKeluar::with('produk')->get()
-        ->groupBy('produk.nama_produk')
-        ->map(fn($item) => $item->sum('jumlah'));
-    $produkKeluarData = collect($labels)->map(fn($nama) => $produkKeluarRaw[$nama] ?? 0);
+        // Data expired & akan expired
+        $today = now()->startOfDay();
+        $in3weeks = now()->addWeeks(3)->endOfDay();
 
-    return view('dashboard', compact('labels', 'stokData', 'produkMasukData', 'produkKeluarData'));
-}
+        $expired = Stok::whereDate('tgl_exp_terakhir', '<=', $today)->get();
+        $will_expired = Stok::whereDate('tgl_exp_terakhir', '>', $today)
+                            ->whereDate('tgl_exp_terakhir', '<=', $in3weeks)
+                            ->get();
 
+        $expiredCount = $expired->count();
+        $willExpiredCount = $will_expired->count();
+
+        // Kirim ke view
+        return view('dashboard', [
+            'labels' => $labels,
+            'stokData' => $stokData,
+            'produkMasukData' => $produkMasukData,
+            'produkKeluarData' => $produkKeluarData,
+            'expiredCount' => $expiredCount,
+            'willExpiredCount' => $willExpiredCount,
+            'expired' => $expired,               
+            'will_expired' => $will_expired,     
+        ]);
+    }
 }
