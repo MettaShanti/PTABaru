@@ -83,8 +83,8 @@
                 label: 'Jumlah Produk',
                 data: [expiredCount, willExpiredCount],
                 backgroundColor: [
-                    'rgba(220, 53, 69, 0.7)',   // Merah
-                    'rgba(255, 193, 7, 0.7)'    // Kuning
+                    'rgba(220, 53, 69, 0.7)',
+                    'rgba(255, 193, 7, 0.7)'
                 ],
                 borderColor: [
                     'rgba(220, 53, 69, 1)',
